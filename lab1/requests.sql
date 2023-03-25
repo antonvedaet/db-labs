@@ -30,3 +30,10 @@ LEFT JOIN person_characteristics AS pc ON p.id = pc.person
 LEFT JOIN anomaly_person_chars AS apc ON pc.id = apc.person
 WHERE p.birthday < current_date - interval '20 years'
 GROUP BY p.name;
+
+SELECT p.name || E'\n' || string_agg(a.name, E'\n') AS person_and_anomalies
+FROM person AS p
+LEFT JOIN person_characteristics AS pc ON p.id = pc.person
+LEFT JOIN anomaly_person_chars AS apc ON pc.id = apc.person
+LEFT JOIN anomaly AS a ON apc.anomaly = a.id
+GROUP BY p.name;
