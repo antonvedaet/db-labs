@@ -1,7 +1,7 @@
+drop table anomaly cascade;
+drop table person_characteristics cascade;
 drop table anomaly_person_chars;
-drop table person_characteristics;
-drop table action_stats;
+drop table action_stats cascade;
 drop table location;
 drop table action;
-drop table anomaly;
 drop table person;
