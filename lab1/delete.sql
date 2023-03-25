@@ -1,6 +1,7 @@
-drop table person_part;
-drop table person;
+drop table anomaly_person_chars;
+drop table person_characteristics;
+drop table action_stats;
 drop table location;
-drop table gender;
 drop table action;
-drop table part_of_body;
+drop table anomaly;
+drop table person;

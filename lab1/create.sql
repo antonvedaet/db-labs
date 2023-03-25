@@ -4,40 +4,48 @@ create table if not exists location
     name varchar(30)
 );
 
-create table if not exists gender
+create table if not exists person
 (
-  name varchar(20) primary key not null
-);
+    id int primary key,
+    name varchar(20),
+    birthday:date
+)
 
-create table if not exists part_of_body
+create table if not exists anomaly
 (
     id int primary key,
     name varchar(20),
     presence boolean
 );
 
-create table if not exists action
+create table if not exists action_stats
 (
     id int primary key,
     name varchar(20),
     attribute varchar(100),
+);
+
+create table if not exists action
+(
+    id int primary key,
+    action int references action_stats(id),
     made_or_not boolean
 );
 
 
-create table if not exists person
+create table if not exists person_characteristics
 (
     id int primary key,
-    name varchar(20),
-    gender varchar(20) references gender(name),
+    person int references person(id),
+    gender varchar(1) check (gender = "M" or gender = "F"),
     current_action int references action(id),
     location int references  location(id),
-    deformities int references part_of_body(id)
+    anomalies int references anomaly(id)
 );
 
-create table if not exists person_part
+create table if not exists anomaly_person_chars
 (
-    person int references person(id) on update cascade,
-    part_of_body int references part_of_body(id) on update cascade
+    person int references person_characteristics(id) on update cascade,
+    anomaly int references anomaly(id) on update cascade
 );
 
