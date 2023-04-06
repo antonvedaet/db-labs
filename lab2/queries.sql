@@ -14,3 +14,9 @@ where "Н_ЛЮДИ"."ИД"=152862;
 
 select count("ИМЯ") from (select "ИМЯ" from  "Н_ЛЮДИ" group by "ИМЯ") as aoaooaoaoao;
 
+
+select "НУ"."ГРУППА", count(*) from "Н_УЧЕНИКИ" "НУ"
+inner join "Н_ПЛАНЫ" "НП" on ("НУ"."ПЛАН_ИД"="НП"."ИД")
+inner join "Н_ОТДЕЛЫ" "НО" on ("НО"."КОРОТКОЕ_ИМЯ"='ВТ' and "НП"."ОТД_ИД"="НО"."ИД")
+where ( "НУ"."ПРИЗНАК"='обучен' AND DATE_PART('year', "НУ"."НАЧАЛО") <= '2011' AND DATE_PART('year', "НУ"."КОНЕЦ") >= '2011')
+group by "НУ"."ГРУППА" having count(*)<5;
